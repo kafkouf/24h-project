@@ -24,7 +24,7 @@ function randInt(n) {
     }
 
     var questiondata=['what is the color ?','what is the word?']
-    var colordata=['red','yellow','green','blue','black','pink','purple' , 'orange' ,'aqua' ,'brown' ,'grey']
+    var colordata=['red','yellow','green','blue','black','pink','purple','orange','aqua','brown','grey']
     var answers=[$('.answer1').html(),$('.answer2').html()]
     
      var randqesust=function(){
@@ -39,7 +39,7 @@ function randInt(n) {
     //     $('.answer2').append(colordata[randInt(11)])
 
     //  }
-
+    
 var score=0
 var wronganswers=0
 var counter=0
@@ -54,30 +54,47 @@ function start(d){
 const count=setInterval(() =>{
     time --;
     $('.timee').html(time);
-    if(time<0){
+    if(time<=0){
   clearInterval(count)
   scores.push(score)
-alert('time is over ,your score is '+score+' in the '+lvl+' level ,try again ?')}
+alert('time is over ,your score is '+score+' in the '+lvl+' level ,try again ?')
+$('.answer1').empty()
+$('.answer2').empty()
+$('.question').empty()
+$('.neded').empty()
+$('.scr').html(0)
+}
 }, 1000);}
 
-    
-
+    function scoreTo0(){
+        return score=0
+    }
+var x= randInt(1)
         var randsug=function(){
-         var colorword=colordata[randInt(11)]
-         var colorvalue=colordata[randInt(11)]
-         console.log('this is color',colorword,'this is colorvalue',colorvalue)
-         
-         
+         var colorword=colordata[randInt(10)]
+         var colorvalue=colordata[randInt(10)]
+         console.log('this is color',colorword,'this is colorvalue.color',colorvalue)
+        
+        
+         if(x===1){
+     
         $('.answer2').append(colorvalue)
         $('.answer1').append(colorword)
         $('.neded').append(colorword)
         $('.neded').css('color',colorvalue)
-       
-        if(($('.answer1').html()&& $('.answer2').html()&&$('.neded').html())===''){
-            colorword=colordata[randInt(11)]
-           colorvalue=colordata[randInt(11)]
+        $('.answer1').attr('name',colorvalue)
+    
+    }
+        else if(x===0){
      
+            $('.answer1').append(colorvalue)
+            $('.answer2').append(colorword)
+            $('.neded').append(colorword)
+            $('.neded').css('color',colorvalue)    
+            
         }
+       
+    
         
     }
     //  }
@@ -94,6 +111,7 @@ $('.restart').click(function(){
     $('.answer2').empty()
     $('.question').empty()
     $('.neded').empty()
+    score=0
     theTimer()
     randsug()
     randqesust()
@@ -102,42 +120,31 @@ $('.restart').click(function(){
    })
 // we still miss to clear the timer each restart
 
-$('.answer1').click(function(){
+$('.answer').click(function(){
     
-    console.log('this is c',counter)
-if($('.question').html()==='what is the word?'){score++
-    $('.scr').html(score)}
-    else(wronganswers++)
-    
+ if($('.question').html()==='what is the word?'&&this.innerHTML===$('.neded').html()){
+    score++
+       $('.scr').html(score)
+    }
+    else if($('.question').html()==='what is the color ?'&&this.innerHTML===$('.neded')[0].style.color){
+        score++
+       $('.scr').html(score)
+}
+    if($('.answer1').html===$('.answer2').html){
+        console.log('1')
     $('.answer1').empty()
     $('.answer2').empty()
     $('.question').empty()
     $('.neded').empty()
     
-    randsug()
+     randsug()
     randqesust()
     
-    
+    }
     
 })
 
-$('.answer2').click(function(){
-    console.log('this is c',counter)
-    if($('.question').html()==='what is the color ?'){score++
-        $('.scr').html(score)}
-    else(wronganswers++)
-   
-    $('.answer1').empty()
-    $('.answer2').empty()
-    $('.question').empty()
-    $('.neded').empty()
-    
-    randsug()
-    randqesust()
-    
-    
 
-})
 var scores=[];
 //we need to local storage the scores so we can find the history of the scors
 

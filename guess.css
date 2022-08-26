@@ -109,8 +109,12 @@
   cursor: default;
   opacity: .24;
 }
-table,tr,td{  border: 1px solid}
-body{background-image: url(a.jpg);
+table,tr,td{  border: 2px solid;
+  font-size: 20px;
+}
+body{
+  background-image: url(a.jpg);
+ 
 font-family: "Lucida Console", "Courier New", monospace;
 }
 p{font-size: 20px;}
