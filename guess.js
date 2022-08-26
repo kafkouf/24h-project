@@ -56,6 +56,7 @@ const count=setInterval(() =>{
     $('.timee').html(time);
     if(time<0){
   clearInterval(count)
+  scores.push(score)
 alert('time is over ,your score is '+score+' in the '+lvl+' level ,try again ?')}
 }, 1000);}
 
@@ -89,14 +90,20 @@ $('.start').click(function(){
    
 })
 $('.restart').click(function(){
+    $('.answer1').empty()
+    $('.answer2').empty()
+    $('.question').empty()
+    $('.neded').empty()
     theTimer()
     randsug()
     randqesust()
+    
    
-   
-})
+   })
+// we still miss to clear the timer each restart
 
 $('.answer1').click(function(){
+    
     console.log('this is c',counter)
 if($('.question').html()==='what is the word?'){score++
     $('.scr').html(score)}
@@ -110,7 +117,7 @@ if($('.question').html()==='what is the word?'){score++
     randsug()
     randqesust()
     
-    scores.push(score)
+    
     
 })
 
@@ -128,10 +135,25 @@ $('.answer2').click(function(){
     randsug()
     randqesust()
     
-    counter++
-    if(counter==10){return score}
+    
+
 })
 var scores=[];
 //we need to local storage the scores so we can find the history of the scors
 
+function store(){
+    console.log(scores);
+    localStorage.setItem('scores',JSON.stringify(scores));
+    alert('Your history of scores :'+scores)
+}
+// got a problem of taking all the prev scores not only the last one
+//dose not corectly
 
+   // var randomquest=function(){
+    //     if(randInt)
+    //     $('#q1').addClass("answer1")
+    //     $('#q2').addClass('answer2')
+
+    //     $('#q2').addClass('answer2')
+    //     $('#q1').addClass("answer1")
+    // }
